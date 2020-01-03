@@ -16,13 +16,13 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
     },
     paper: {
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(1),
         width: '100%',
         overflowX: 'auto',
-        marginBottom: theme.spacing(2),
+        marginBottom: theme.spacing(1),
     },
     table: {
-        width: 420,
+        width: 330,
     },
     bar: {
         justifyContent: 'center',
@@ -40,18 +40,23 @@ const TeamTable = ({ name, sensors }) => {
                 </Toolbar>
                 <Table className={classes.table} size="small">
                     <TableHead>
-                        <TableRow>
-                            <TableCell align='left'>name</TableCell>
-                            <TableCell align='left'>value</TableCell>
-                            <TableCell align='left'>creation date</TableCell>
+                        <TableRow >
+                            { /* 
+                            <TableCell style={{ color: 'red' }} align='left'>Name</TableCell>
+                            <TableCell style={{ color: 'red' }} align='left'>Value</TableCell>
+                            <TableCell style={{ color: 'red' }} align='left'>Creation Date</TableCell>
+                            */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {sensors.map(sensor => (
+                        {sensors && sensors.map(sensor => (
                             <TableRow key={sensor.id}>
-                                <TableCell>{sensor.name}</TableCell>
+                                <TableCell style={{ color: 'red' }}>{sensor.name}</TableCell>
                                 <TableCell>{sensor.value}</TableCell>
-                                <TableCell>{moment(new Date(sensor.created_at)).format("HH:mm:ss.SSS A on D MMM YYYY")}</TableCell>
+                                <TableCell>{moment(new Date(sensor.created_at)).format("HH:mm:ss")}</TableCell>
+                                {/* 
+                                <TableCell>{moment(new Date(sensor.created_at)).format("HH:mm:ss.SSS A on D MMM YYYY")}</TableCell> 
+                                */}
                             </TableRow>
                         ))}
                     </TableBody>

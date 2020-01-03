@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        paddingTop: 20,
+        paddingTop: 10,
         paddingBottom: 40,
         backgroundColor: '#F3F3F3',
     },
@@ -27,7 +27,6 @@ const List = ({ teams }) => {
                     <TeamTable name={team.name} sensors={team.sensors} />
                 </GridList>
             ))}
-
         </div>
     );
 }
