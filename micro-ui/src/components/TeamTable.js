@@ -29,14 +29,23 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const TeamTable = ({ name, sensors }) => {
+const TeamTable = ({ name, sensors, isReady }) => {
     const classes = useStyles();
+
+    let valueColor = 'black';
+    let tableColor = 'white';
+    let nameColor = 'red';
+    if (isReady) {
+        tableColor = 'green';
+        valueColor = 'white';
+        nameColor = 'white';
+    }
 
     return (
         <div className={classes.root}>
-            <Paper className={classes.paper} elevation={3}>
+            <Paper className={classes.paper} elevation={3} style={{ backgroundColor: tableColor }}>
                 <Toolbar className={classes.bar}>
-                    <Typography variant="h5">{name}</Typography>
+                    <Typography style={{ color: valueColor }} variant="h5">{name}</Typography>
                 </Toolbar>
                 <Table className={classes.table} size="small">
                     <TableHead>
@@ -51,9 +60,9 @@ const TeamTable = ({ name, sensors }) => {
                     <TableBody>
                         {sensors && sensors.map(sensor => (
                             <TableRow key={sensor.id}>
-                                <TableCell style={{ color: 'red' }}>{sensor.name}</TableCell>
-                                <TableCell>{sensor.value}</TableCell>
-                                <TableCell>{moment(new Date(sensor.created_at)).format("HH:mm:ss")}</TableCell>
+                                <TableCell style={{ color: nameColor }}>{sensor.name}</TableCell>
+                                <TableCell style={{ color: valueColor }}>{sensor.value}</TableCell>
+                                <TableCell style={{ color: valueColor }}>{moment(new Date(sensor.created_at)).format("HH:mm:ss")}</TableCell>
                                 {/* 
                                 <TableCell>{moment(new Date(sensor.created_at)).format("HH:mm:ss.SSS A on D MMM YYYY")}</TableCell> 
                                 */}
@@ -68,6 +77,7 @@ const TeamTable = ({ name, sensors }) => {
 
 TeamTable.propTypes = {
     name: PropTypes.string.isRequired,
+    isReady: PropTypes.bool.isRequired,
     sensors: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,

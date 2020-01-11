@@ -24,7 +24,7 @@ const List = ({ teams }) => {
         <div className={classes.root}>
             {teams.map(team => (
                 <GridList className={classes.gridList}>
-                    <TeamTable name={team.name} sensors={team.sensors} />
+                    <TeamTable name={team.name} sensors={team.sensors} isReady={team.ready} />
                 </GridList>
             ))}
         </div>
@@ -40,6 +40,7 @@ class Sensors extends Component {
             teams: [
                 {
                     name: '',
+                    ready: false,
                     sensors: [
                         {
                             name: '',
